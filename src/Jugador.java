@@ -3,6 +3,8 @@ import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import imagenes.NombreCarta;
+
 public class Jugador {
 
     private final int TOTAL_CARTAS = 10;
@@ -39,6 +41,39 @@ public class Jugador {
         }
 
         pnl.repaint();
+    }
+
+    public String getGrupos(){
+        String resultado = "No se encontraron grupos";
+
+        //Calcular los contadores por nombre de carta
+        int[] contadores = new int[NombreCarta.values().length];
+        for (Carta carta : cartas){
+            contadores[carta.getNombre().ordinal()]++;
+        }
+
+        //verficar si hubo grupos
+        boolean hayGrupos = false;
+        for (int contador : contadores){
+            if (contador>=2){
+                hayGrupos=true;
+                break;
+            }
+        }
+
+        if (hayGrupos){
+            resultado = "Se hallaron los siguientes grupos:\n";
+            for(int p = 0; p < contadores.length; p++){
+                int contador = contadores[p];
+                if (contador >=2){
+                    resultado+= Grupo.values()[contador] + " de " + NombreCarta.values()[p] + "\n";
+            }
+            
+        }
+
+    }
+
+        return resultado;
     }
     
 }

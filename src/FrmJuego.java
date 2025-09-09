@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -11,6 +12,7 @@ public class FrmJuego extends JFrame {
 
     private JPanel pnlJugador1, pnlJugador2;
     private Jugador jugador1, jugador2;
+    JTabbedPane tpJugadores;
 
     public FrmJuego() {
 
@@ -35,13 +37,13 @@ public class FrmJuego extends JFrame {
         pnlJugador2.setBackground(new Color(1, 64, 52));
         pnlJugador2.setLayout(null);
 
-        JTabbedPane tplJugadores = new JTabbedPane();
-        tplJugadores.addTab("Martín Estrada Contreras", pnlJugador1); // Estos nombres son un chiste sacado de una
+        tpJugadores = new JTabbedPane();
+        tpJugadores.addTab("Player1", pnlJugador1); // Estos nombres son un chiste sacado de una
                                                                       // canción de Vicente Fernandez
-        tplJugadores.addTab("Raúl Vidal", pnlJugador2);
-        tplJugadores.setBounds(10, 40, 550, 200);
+        tpJugadores.addTab("Player2", pnlJugador2);
+        tpJugadores.setBounds(10, 40, 550, 200);
 
-        getContentPane().add(tplJugadores);
+        getContentPane().add(tpJugadores);
 
         btnRepartir.addActionListener(new ActionListener() {
 
@@ -75,8 +77,14 @@ public class FrmJuego extends JFrame {
     }
 
     private void verificar() {
-        jugador1.mostrar(pnlJugador1);
-        jugador2.mostrar(pnlJugador2);
+        switch (tpJugadores.getSelectedIndex()) {
+            case 0:
+                JOptionPane.showMessageDialog(null, jugador1.getGrupos());
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, jugador2.getGrupos());
+                break;
+        }
     }
 
 }
