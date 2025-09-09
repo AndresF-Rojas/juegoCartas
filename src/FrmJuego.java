@@ -39,7 +39,7 @@ public class FrmJuego extends JFrame {
 
         tpJugadores = new JTabbedPane();
         tpJugadores.addTab("Player1", pnlJugador1); // Estos nombres son un chiste sacado de una
-                                                                      // canción de Vicente Fernandez
+                                                    // canción de Vicente Fernandez
         tpJugadores.addTab("Player2", pnlJugador2);
         tpJugadores.setBounds(10, 40, 550, 200);
 
@@ -77,14 +77,17 @@ public class FrmJuego extends JFrame {
     }
 
     private void verificar() {
-        switch (tpJugadores.getSelectedIndex()) {
-            case 0:
-                JOptionPane.showMessageDialog(null, jugador1.getGrupos());
-                break;
-            case 1:
-                JOptionPane.showMessageDialog(null, jugador2.getGrupos());
-                break;
-        }
+        Jugador jugadorActivo = (tpJugadores.getSelectedIndex() == 0) ? jugador1 : jugador2;
+
+        // obtenemos grupos
+        String grupos = jugadorActivo.getGrupos();
+
+        // calculamos puntaje
+        int puntaje = calculadorPuntaje.CalcularPuntaje(jugadorActivo);
+
+        // mostramos todo en un solo mensaje
+        JOptionPane.showMessageDialog(null,
+                grupos + "\n\nPuntaje (cartas sin grupos): " + puntaje);
     }
 
 }

@@ -13,6 +13,9 @@ public class Carta {
 
     private int indice;
 
+    private boolean parteDeGrupo = false;
+
+
     public Carta(Random r) {
         indice = r.nextInt(52) + 1;
     }
@@ -52,6 +55,14 @@ public class Carta {
         int posicion = residuo == 0 ? 12 : residuo -1;
         
         return NombreCarta.values()[posicion];
+    }
+
+    public boolean esParteDeGrupo() {
+        return parteDeGrupo;
+    }
+
+    public void setParteDeGrupo(boolean valor) {
+        parteDeGrupo = valor;
     }
 
 }
